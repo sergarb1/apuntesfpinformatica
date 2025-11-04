@@ -6,20 +6,35 @@
   <title>Apuntes FP Informática</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .gradient-bg { background: linear-gradient(135deg, #e0f2ff 0%, #f7faff 50%, #ffffff 100%); }
-    .card { transition: all 0.25s ease; font-size: 0.9rem; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    h1, h3 { font-family: 'Outfit', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #f0f7ff 0%, #e6ecff 50%, #ffffff 100%); }
+    .card {
+      transition: all 0.25s ease;
+      font-size: 0.9rem;
+      border-radius: 1rem;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
 <body class="gradient-bg text-gray-800 min-h-screen flex flex-col">
-  <div id="app" class="flex flex-col flex-grow">
+  <div id="app" class="flex flex-col flex-grow fade-in">
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-md shadow-md py-8 px-4 flex flex-col items-center border-b border-gray-200">
-      <img src="logo.png" alt="Logo FP" class="w-64 max-w-full h-auto mb-3 drop-shadow-md" />
+    <header class="bg-white/80 backdrop-blur-md shadow-md py-8 px-4 flex flex-col items-center border-b border-gray-200 rounded-b-3xl">
+      <img src="logo.png" alt="Logo FP" class="w-56 max-w-full h-auto mb-3 drop-shadow-md" />
       <h1 class="text-4xl font-bold text-blue-700">Apuntes FP Informática</h1>
       <p class="text-gray-600 mt-2 text-center text-sm md:text-base">
         Materiales, ejercicios y recursos organizados por módulos y etiquetas
@@ -29,7 +44,7 @@
     <!-- Main -->
     <main class="flex-grow max-w-7xl mx-auto w-full p-6 space-y-10">
       <!-- Filtros -->
-      <section class="bg-white/80 backdrop-blur-md p-5 rounded-2xl shadow-md border border-gray-200">
+      <section class="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-md border border-gray-200">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input
             v-model="search"
@@ -52,10 +67,13 @@
             <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
           </select>
         </div>
+        <p class="mt-4 text-sm text-gray-600 text-center">
+          {{ filteredResources.length }} recurso<span v-if="filteredResources.length !== 1">s</span> encontrado<span v-if="filteredResources.length !== 1">s</span>
+        </p>
       </section>
 
       <!-- Recursos -->
-      <section class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 transition-all">
+      <section class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 transition-all">
         <template v-if="filteredResources.length">
           <article
             v-for="r in filteredResources"
@@ -67,30 +85,35 @@
               <div class="text-gray-600 mb-3 leading-snug text-sm" v-html="r.Descripción"></div>
             </div>
 
-            <div class="flex gap-3 mt-2">
-              <a
-                v-if="r.URL"
-                :href="r.URL"
-                target="_blank"
-                class="flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium text-xs"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7v7m0 0L10 21l-7-7L14 3z" />
-                </svg>
-                Ver recurso
-              </a>
+            <div class="mt-auto pt-3 border-t border-gray-100">
+              <p v-if="r.FechaPublicacion" class="text-xs text-gray-400 mb-2">
+                📅 Publicado el {{ formatFecha(r.FechaPublicacion) }}
+              </p>
+              <div class="flex gap-3">
+                <a
+                  v-if="r.URL"
+                  :href="r.URL"
+                  target="_blank"
+                  class="flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium text-xs"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7v7m0 0L10 21l-7-7L14 3z" />
+                  </svg>
+                  Ver recurso
+                </a>
 
-              <a
-                v-if="r.Github"
-                :href="r.Github"
-                target="_blank"
-                class="flex items-center gap-1 text-gray-800 hover:text-gray-900 font-medium text-xs"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 .5C5.65.5.5 5.64.5 12a11.47 11.47 0 007.85 10.93c.58.1.79-.25.79-.56v-2.05c-3.19.7-3.86-1.38-3.86-1.38-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.7.08-.7 1.17.09 1.78 1.2 1.78 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.76.4-1.25.73-1.54-2.54-.29-5.2-1.27-5.2-5.65 0-1.25.45-2.28 1.19-3.08-.12-.3-.52-1.5.11-3.13 0 0 .97-.31 3.18 1.18a10.93 10.93 0 015.8 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.63.23 2.83.11 3.13.74.8 1.18 1.83 1.18 3.08 0 4.4-2.67 5.36-5.22 5.64.42.36.8 1.07.8 2.16v3.2c0 .31.21.66.8.55A11.47 11.47 0 0023.5 12C23.5 5.64 18.35.5 12 .5z" />
-                </svg>
-                GitHub
-              </a>
+                <a
+                  v-if="r.Github"
+                  :href="r.Github"
+                  target="_blank"
+                  class="flex items-center gap-1 text-gray-800 hover:text-gray-900 font-medium text-xs"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .5C5.65.5.5 5.64.5 12a11.47 11.47 0 007.85 10.93c.58.1.79-.25.79-.56v-2.05c-3.19.7-3.86-1.38-3.86-1.38-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.7.08-.7 1.17.09 1.78 1.2 1.78 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.76.4-1.25.73-1.54-2.54-.29-5.2-1.27-5.2-5.65 0-1.25.45-2.28 1.19-3.08-.12-.3-.52-1.5.11-3.13 0 0 .97-.31 3.18 1.18a10.93 10.93 0 015.8 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.63.23 2.83.11 3.13.74.8 1.18 1.83 1.18 3.08 0 4.4-2.67 5.36-5.22 5.64.42.36.8 1.07.8 2.16v3.2c0 .31.21.66.8.55A11.47 11.47 0 0023.5 12C23.5 5.64 18.35.5 12 .5z" />
+                  </svg>
+                  GitHub
+                </a>
+              </div>
             </div>
           </article>
         </template>
@@ -102,7 +125,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-800 text-white text-center py-4 text-xs md:text-sm">
+    <footer class="bg-blue-800 text-white text-center py-4 text-xs md:text-sm rounded-t-3xl">
       © 2025 Apuntes FP Informática — Desarrollado con ❤️ y Vue 3
     </footer>
   </div>
@@ -131,13 +154,21 @@
 
         const parseDate = (fecha) => {
           if (!fecha) return 0;
-          // Admite varios formatos: ISO, DD/MM/YYYY, YYYY-MM-DD
           const iso = fecha.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$3-$2-$1');
           return new Date(iso).getTime() || 0;
         };
 
+        const formatFecha = (fecha) => {
+          const date = new Date(parseDate(fecha));
+          if (isNaN(date)) return "";
+          return date.toLocaleDateString("es-ES", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+          });
+        };
+
         const filteredResources = computed(() => {
-          // Ordenar de más reciente a más antiguo
           const sorted = [...datos.value].sort((a, b) => parseDate(b.FechaPublicacion) - parseDate(a.FechaPublicacion));
 
           return sorted.filter(d => {
@@ -161,7 +192,7 @@
           datos.value = await res.json();
         });
 
-        return { search, selectedModule, selectedTag, modules, tags, filteredResources };
+        return { search, selectedModule, selectedTag, modules, tags, filteredResources, formatFecha };
       }
     }).mount("#app");
   </script>
