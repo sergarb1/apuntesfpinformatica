@@ -1,0 +1,496 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apuntes FP Informática</title>
+  <link rel="icon" type="image/png" href="logoCuadrado.png" />
+  <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/lucide@0.321.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    [v-cloak] { display: none; }
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 50%, #f8faff 100%); }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+      border-color: #bfdbfe;
+    }
+
+    .sticky-filters {
+      position: sticky;
+      top: 0.5rem;
+      z-index: 40;
+    }
+
+    .list-enter-active, .list-leave-active { transition: all 0.3s ease; }
+    .list-enter-from, .list-leave-to { opacity: 0; transform: scale(0.95); }
+    .list-move { transition: transform 0.3s ease; }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  </style>
+</head>
+
+<body class="gradient-bg text-gray-800 min-h-screen flex flex-col">
+  <div id="app" v-cloak class="flex flex-col flex-grow">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm py-6 px-4 flex flex-col items-center border-b border-gray-200 rounded-b-[2rem] relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
+      <img src="logo.png" alt="Logo FP" class="w-32 max-w-full h-auto mb-2 drop-shadow-md" />
+      <h1 class="text-2xl font-extrabold text-blue-800 tracking-tight text-center">Apuntes FP Informática</h1>
+      <p class="text-gray-500 text-[10px] uppercase tracking-widest font-bold mt-1 text-center">Recursos para profesorado y alumnado de informática</p>
+      <p class="text-[9px] text-gray-400 mt-2 text-center">
+        <span class="text-gray-400">Web dentro del proyecto </span>
+        <a href="https://mejoratudocencia.es" target="_blank" class="text-blue-600 hover:text-blue-800 font-bold tracking-wider">https://mejoratudocencia.es</a>
+      </p>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 space-y-4">
+      <!-- Filtros -->
+      <section class="glass-effect p-4 rounded-3xl shadow-sm border border-white/50 sticky-filters">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="relative">
+            <label class="flex items-center gap-1.5 text-[9px] font-bold text-blue-600 mb-1 ml-1 uppercase tracking-widest">
+              <i data-lucide="search" class="w-2.5 h-2.5"></i> Búsqueda
+            </label>
+            <div class="relative">
+              <input
+                v-model="search"
+                type="text"
+                placeholder="Filtrar por nombre..."
+                class="w-full pl-8 p-2 bg-white/50 border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:outline-none text-[11px] transition-all"
+              />
+              <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400">
+                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+          </div>
+          <div>
+            <label class="flex items-center gap-1.5 text-[9px] font-bold text-blue-600 mb-1 ml-1 uppercase tracking-widest">
+              <i data-lucide="layers" class="w-2.5 h-2.5"></i> Módulo
+            </label>
+            <select
+              v-model="selectedModule"
+              class="w-full p-2 bg-white/50 border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:outline-none text-[11px] transition-all cursor-pointer"
+            >
+              <option value="">Todos los módulos</option>
+              <option v-for="mod in modules" :key="mod" :value="mod">{{ getModuleName(mod) }}</option>
+            </select>
+          </div>
+          <div>
+            <label class="flex items-center gap-1.5 text-[9px] font-bold text-blue-600 mb-1 ml-1 uppercase tracking-widest">
+              <i data-lucide="filter" class="w-2.5 h-2.5"></i> Tipo
+            </label>
+            <select
+              v-model="selectedCategory"
+              class="w-full p-2 bg-white/50 border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:outline-none text-[11px] transition-all cursor-pointer"
+            >
+              <option value="">Cualquier tipo</option>
+              <option v-for="cat in availableCategories" :key="cat" :value="cat">{{ getCategoryName(cat) }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="mt-3 flex justify-center items-center gap-4">
+          <div v-if="loading" class="flex items-center gap-2 text-[9px] text-blue-600 font-bold animate-pulse">
+            <i data-lucide="refresh-cw" class="w-3 h-3 animate-spin"></i> CARGANDO DATOS...
+          </div>
+          <span v-else class="px-2.5 py-0.5 bg-blue-50 text-blue-700 rounded-full text-[9px] font-bold shadow-sm border border-blue-100 flex items-center gap-1">
+            <i data-lucide="database" class="w-2.5 h-2.5"></i> {{ filteredResources.length }} recursos
+          </span>
+          <button v-if="search || selectedModule || selectedCategory" @click="resetFilters" class="text-[9px] font-bold text-red-500 hover:text-red-700 uppercase tracking-tighter flex items-center gap-1">
+            <i data-lucide="x-circle" class="w-2.5 h-2.5"></i> Limpiar
+          </button>
+        </div>
+      </section>
+
+      <!-- Recursos -->
+      <transition-group 
+        name="list" 
+        tag="section" 
+        class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      >
+        <template v-if="displayedResources.length">
+          <article
+            v-for="r in displayedResources"
+            :key="r.Título"
+            class="card bg-white rounded-2xl p-4 flex flex-col h-full relative group border border-gray-100 overflow-hidden"
+          >
+            <div class="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div class="mb-2">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex flex-wrap gap-1">
+                   <span v-for="m in r.Modulos" :key="m" 
+                     class="text-[7px] font-bold bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-sm border border-blue-100 uppercase">
+                     {{ getModuleName(m) }}
+                   </span>
+                </div>
+                <div class="text-gray-300 group-hover:text-blue-400 transition-colors">
+                   <i :data-lucide="getResourceIcon(r)" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <h3 class="font-bold text-xs text-gray-900 mb-1 leading-tight group-hover:text-blue-700 transition-colors line-clamp-2" :title="r.Título">{{ r.Título }}</h3>
+              <div class="text-gray-500 mb-2 leading-relaxed text-[10px] line-clamp-3 overflow-hidden" v-html="r.Descripción"></div>
+            </div>
+
+            <div class="mt-auto">
+              <div class="flex flex-wrap gap-1 mb-2">
+                <span v-for="label in getUniqueCategoryLabels(r.Etiquetas)" :key="label" 
+                  class="text-[7px] bg-gray-50 text-gray-400 px-1 py-0.5 rounded-sm font-medium border border-gray-100 uppercase tracking-tighter">
+                  {{ label }}
+                </span>
+              </div>
+              
+              <div class="pt-2 border-t border-gray-50 flex items-center justify-between">
+                <span v-if="r.FechaPublicacion" class="text-[8px] text-gray-400 font-semibold flex items-center gap-1">
+                  <i data-lucide="calendar" class="w-2.5 h-2.5"></i>
+                  {{ formatFecha(r.FechaPublicacion) }}
+                </span>
+                
+                <div class="flex gap-1.5">
+                  <a v-if="r.URL" :href="r.URL" target="_blank" 
+                    class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all shadow-sm"
+                    title="Ver recurso">
+                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                  </a>
+                  <a v-if="r.Github" :href="r.Github" target="_blank" 
+                    class="p-1.5 bg-gray-50 text-gray-700 rounded-lg hover:bg-900 hover:text-white transition-all shadow-sm"
+                    title="GitHub">
+                    <i data-lucide="github" class="w-3 h-3"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </template>
+      </transition-group>
+
+      <!-- Infinite Scroll Sentinel -->
+      <div v-if="hasMore" id="sentinel" class="py-12 flex flex-col items-center justify-center space-y-6">
+        <div class="flex items-center gap-3 text-blue-600 bg-blue-50 px-4 py-2 rounded-full shadow-sm border border-blue-100">
+          <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Sincronizando base de conocimientos...</span>
+        </div>
+        <div class="max-w-md w-full px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 animate-pulse"></div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+            <span class="text-[9px] font-mono text-gray-400 ml-2 uppercase tracking-tighter">Gemini CLI — Debug Mode</span>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-3 border border-gray-100">
+            <p class="text-[11px] text-gray-700 font-mono leading-relaxed">
+              <span class="text-blue-500 font-bold">$</span> <span class="text-gray-400">get-joke --topic fp-informatica</span><br>
+              <span class="text-emerald-600">></span> {{ currentJoke }}
+            </p>
+          </div>
+          <div class="mt-3 flex justify-between items-center">
+            <span class="text-[8px] text-gray-400 font-mono">Status: LOADING_RESOURCES...</span>
+            <span class="text-[8px] text-gray-400 font-mono">{{ displayedResources.length }}/{{ filteredResources.length }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div v-if="!loading && !filteredResources.length" class="text-center py-16 bg-white/50 rounded-[2rem] border border-dashed border-gray-300">
+        <div class="inline-flex p-3 bg-gray-100 rounded-full mb-3">
+          <i data-lucide="search-x" class="w-6 h-6 text-gray-400"></i>
+        </div>
+        <p class="text-xs text-gray-500 font-medium">No se han encontrado resultados.</p>
+        <button @click="resetFilters" class="mt-2 text-[10px] text-blue-600 font-bold hover:underline uppercase">Resetear filtros</button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center py-3 text-[9px] uppercase tracking-[0.2em] rounded-t-[2rem]">
+      © 2026 Apuntes FP Informática — Elaborado por profesorado para profesorado ❤️
+    </footer>
+  </div>
+
+  <script>
+    const { createApp, ref, computed, onMounted, onUpdated, nextTick, watch } = Vue;
+
+    const JOKES = [
+      "¿Por qué los programadores prefieren el modo oscuro? Porque la luz atrae a los bichos (bugs).",
+      "Un informático le dice a su mujer: 'Voy al súper, ¿quieres algo?'. Ella responde: 'Trae una barra de pan, y si hay huevos, trae doce'. El informático volvió con doce barras de pan.",
+      "¿Qué es un algoritmo? Una palabra que usan los informáticos cuando no quieren explicar lo que han hecho.",
+      "Hardware: Lo que puedes golpear. Software: Aquello a lo que solo puedes gritar.",
+      "¿Cuántos programadores hacen falta para cambiar una bombilla? Ninguno, es un problema de hardware.",
+      "En mi casa somos 10 personas: mi mujer, yo y nuestros 8 hijos... espera, eso es binario.",
+      "¿Cuál es la diferencia entre un programador y un estudiante de FP? El estudiante cree que el código funcionará a la primera.",
+      "El código de un buen estudiante de FP: Si funciona, no lo toques.",
+      "Dime algo que no sea código. - La vida. - ¿Tiene documentación? - No. - Entonces es un bug.",
+      "¿Por qué el programador se quedó en la ducha? Porque el champú decía: Enjuague, repita."
+    ];
+
+    createApp({
+      setup() {
+        const datos = ref([]);
+        const loading = ref(true);
+        const search = ref("");
+        const selectedModule = ref("");
+        const selectedCategory = ref("");
+        const limit = ref(24);
+        const currentJoke = ref(JOKES[0]);
+
+        const moduleNames = {
+          "1BAC": "1º Bach", "2BAC": "2º Bach",
+          "1ºESO": "1º ESO", "2ºESO": "2º ESO", "3ºESO": "3º ESO", "4ºESO": "4º ESO",
+          "AD": "GS DAM - AD Acceso a Datos", 
+          "AOF": "GM SMR - AOF Ofimática",
+          "APW": "GM SMR - APW Aplicaciones Web", 
+          "ASGBD": "GS ASIR - ASGBD",
+          "ASO": "GS ASIR - ASO", 
+          "BDA": "GS DAM/DAW - BDA Bases de Datos",
+          "DAW": "GS DAW - DAW", 
+          "DI": "GS DAM - DI Diseño de Interfaces",
+          "DIW": "GS DAW - DIW", 
+          "DWEC": "GS DAW - DWEC", 
+          "DWES": "GS DAW - DWES", 
+          "ED": "GS DAM/DAW - ED Entornos de Desarrollo",
+          "EEE": "GM SMR - EEE",
+          "ESPECIALIZACION": "CE - Ciberseguridad", 
+          "IA": "CE - IA I.A. y Big Data",
+          "FHW": "GS ASIR - FHW Fundamentos de Hardware", 
+          "GBD": "GS ASIR - GBD", 
+          "GENERAL": "General", "general": "General",
+          "IAW": "GS ASIR - IAW",
+          "IMRT": "GM SMR - IMRT", 
+          "ISO": "GS ASIR - ISO",
+          "LGM": "GS DAM/DAW/ASIR - LGM Lenguajes de Marcas", 
+          "MME": "GM SMR - MME",
+          "MMSCI": "GM SMR - MMSCI", 
+          "OACE": "FPB - OACE",
+          "OAD": "FPB - OAD", 
+          "PAR": "GS ASIR - PAR",
+          "PMDM": "GS DAM - PMDM", 
+          "PRG": "GS DAM/DAW - PRG Programación",
+          "PSP": "GS DAM - PSP", 
+          "RAL": "GM SMR - RAL Redes Locales",
+          "SAD": "GS ASIR - SAD", 
+          "SER": "GM SMR - SER Servicios en Red",
+          "SGE": "GS DAM - SGE", 
+          "SI": "GS DAM/DAW - SI Sistemas Informáticos",
+          "SIN": "GM SMR - SIN Seguridad Informática", 
+          "SOM": "GM SMR - SOM Sistemas Operativos Monopuesto", 
+          "SOR": "GM SMR - SOR", 
+          "SRI": "GS ASIR - SRI",
+          "MAQUINAS": "Virtualización", "maquinas": "Virtualización",
+          "APIS": "APIs", "apis": "APIs",
+          "hosting": "Hosting"
+        };
+
+        const categoryNames = {
+          "APUNTES": "Apuntes", "APUNTES-OTROS": "Externos",
+          "RECURSOS": "Recursos", "CHEATSHEETS": "Chuletas",
+          "JUEGOS": "Juegos", "RETOS": "Retos",
+          "CURSOS": "Cursos", "LIBROS": "Libros",
+          "JUECES": "Jueces", "MAQUINAS-Y-CONTENEDORES": "Docker/VM",
+          "APIS-PUBLICAS": "APIs", "ESPECIALIZACION-SEGURIDAD-RECURSOS": "Ciber"
+        };
+
+        const getModuleName = (acronym) => moduleNames[acronym] || acronym;
+        const getCategoryName = (cat) => categoryNames[cat] || cat;
+        
+        const getCategoryLabel = (tag) => {
+          const type = tag.split('-').pop();
+          return categoryNames[type] || type;
+        };
+
+        const getUniqueCategoryLabels = (etiquetas) => {
+          return [...new Set(etiquetas.map(getCategoryLabel))];
+        };
+
+        const getResourceIcon = (r) => {
+          const tags = r.Etiquetas || [];
+          if (tags.some(t => t.includes("JUEGOS"))) return "gamepad-2";
+          if (tags.some(t => t.includes("RETOS"))) return "zap";
+          if (tags.some(t => t.includes("LIBROS"))) return "book-open";
+          if (tags.some(t => t.includes("CURSOS"))) return "graduation-cap";
+          if (tags.some(t => t.includes("CHEATSHEETS"))) return "scroll-text";
+          if (tags.some(t => t.includes("APUNTES"))) return "file-text";
+          if (tags.some(t => t.includes("MAQUINAS"))) return "container";
+          return "file";
+        };
+
+        const resetFilters = () => {
+          search.value = "";
+          selectedModule.value = "";
+          selectedCategory.value = "";
+        };
+
+        const modules = computed(() => {
+          const allModules = [...new Set(datos.value.flatMap(d => d.Modulos || []).filter(Boolean))];
+          
+          // Orden de prioridad para los grupos
+          const groupOrder = ["GS DAM", "GS DAW", "GS ASIR", "GM SMR", "FPB", "CE", "1º", "2º", "3º", "4º"];
+          
+          return allModules.sort((a, b) => {
+            const nameA = getModuleName(a);
+            const nameB = getModuleName(b);
+            
+            // Encontrar el índice del grupo para cada módulo
+            const indexA = groupOrder.findIndex(group => nameA.includes(group));
+            const indexB = groupOrder.findIndex(group => nameB.includes(group));
+            
+            // Si ambos están en grupos conocidos
+            if (indexA !== -1 && indexB !== -1) {
+              if (indexA !== indexB) return indexA - indexB;
+              return nameA.localeCompare(nameB); // Si son del mismo grupo, alfabético
+            }
+            
+            // Si solo uno tiene grupo, ese va primero
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+            
+            // Si ninguno tiene grupo, alfabético general
+            return nameA.localeCompare(nameB);
+          });
+        });
+
+        const availableCategories = computed(() => {
+          let source = datos.value;
+          if (selectedModule.value) {
+            source = source.filter(d => d.Modulos && d.Modulos.includes(selectedModule.value));
+          }
+          const allTags = source.flatMap(d => d.Etiquetas || []);
+          const types = allTags.map(tag => {
+            for (const key in categoryNames) { if (tag.endsWith(key)) return key; }
+            return null;
+          }).filter(Boolean);
+          return [...new Set(types)].sort();
+        });
+
+        const sortedData = computed(() => {
+          return [...datos.value].sort((a, b) => {
+            const dateA = a.FechaPublicacion ? new Date(a.FechaPublicacion).getTime() : 0;
+            const dateB = b.FechaPublicacion ? new Date(b.FechaPublicacion).getTime() : 0;
+            return dateB - dateA;
+          });
+        });
+
+        const filteredResources = computed(() => {
+          return sortedData.value.filter(d => {
+            const text = search.value.toLowerCase();
+            const byText = !text || d.Título?.toLowerCase().includes(text) || d.Descripción?.toLowerCase().includes(text);
+            const byModule = !selectedModule.value || (d.Modulos && d.Modulos.includes(selectedModule.value));
+            const byCategory = !selectedCategory.value || (d.Etiquetas || []).some(e => e.endsWith(selectedCategory.value));
+            return byText && byModule && byCategory;
+          });
+        });
+
+        const displayedResources = computed(() => {
+          return filteredResources.value.slice(0, limit.value);
+        });
+
+        const hasMore = computed(() => {
+          return limit.value < filteredResources.value.length;
+        });
+
+        const formatFecha = (fecha) => {
+          if (!fecha) return "";
+          const date = new Date(fecha);
+          if (isNaN(date.getTime())) return fecha;
+          return date.toLocaleDateString("es-ES", { day: "2-digit", month: "short" });
+        };
+
+        const loadMore = () => {
+          if (hasMore.value) {
+            currentJoke.value = JOKES[Math.floor(Math.random() * JOKES.length)];
+            limit.value += 24;
+          }
+        };
+
+        const startBackgroundLoading = () => {
+          const loop = () => {
+            if (hasMore.value) {
+              limit.value += 12; // Carga en segundo plano más suave
+              currentJoke.value = JOKES[Math.floor(Math.random() * JOKES.length)];
+              setTimeout(loop, 4000); // Cada 4 segundos
+            }
+          };
+          setTimeout(loop, 2000);
+        };
+
+        watch([search, selectedModule, selectedCategory], () => {
+          limit.value = 24;
+          // El loop de background se detendrá al cambiar filtros y se reactivará si hay más
+          setTimeout(startBackgroundLoading, 1000);
+        });
+
+        const setupIntersectionObserver = () => {
+          const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && hasMore.value) {
+              loadMore();
+            }
+          }, { 
+            threshold: 0,
+            rootMargin: '0px 0px 400px 0px' 
+          });
+
+          const sentinel = document.getElementById('sentinel');
+          if (sentinel) observer.observe(sentinel);
+        };
+
+        onMounted(async () => {
+          try {
+            const res = await fetch("recursos.json");
+            datos.value = await res.json();
+          } catch (e) { console.error("Fetch error:", e); }
+          finally { 
+            loading.value = false;
+            nextTick(() => {
+              lucide.createIcons();
+              setupIntersectionObserver();
+              startBackgroundLoading();
+            });
+          }
+        });
+
+        onUpdated(() => {
+          lucide.createIcons();
+          setupIntersectionObserver();
+        });
+
+        return { 
+          loading, search, selectedModule, selectedCategory, 
+          modules, availableCategories, filteredResources, displayedResources, hasMore, currentJoke,
+          formatFecha, getModuleName, getCategoryName, getCategoryLabel, getUniqueCategoryLabels, getResourceIcon, resetFilters 
+        };
+      }
+    }).mount("#app");
+  </script>
+</body>
+</html>
