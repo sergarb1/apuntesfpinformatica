@@ -12,8 +12,11 @@
   <link rel="manifest" href="site.webmanifest" />
 
   <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.prod.js"></script>
+  <script>window.Vue || document.write('<scr' + 'ipt src="vendor/vue.global.prod.js"><\/scr' + 'ipt>')</script>
   <script src="https://unpkg.com/lucide@0.321.0/dist/umd/lucide.min.js"></script>
+  <script>window.lucide || document.write('<scr' + 'ipt src="vendor/lucide.min.js"><\/scr' + 'ipt>')</script>
   <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+  <script>window.tailwind || document.write('<scr' + 'ipt src="vendor/tailwind.min.js"><\/scr' + 'ipt>')</script>
   <script>
     tailwind.config = {
       theme: {

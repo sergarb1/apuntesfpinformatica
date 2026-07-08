@@ -14,6 +14,7 @@ yarn-error.log
 package-lock.json
 *.js
 !recursos.json
+!vendor/*.js
 AGENTS.md
 .codegraph/
 .serena/
