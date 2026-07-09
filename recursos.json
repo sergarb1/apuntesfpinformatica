@@ -9290,5 +9290,21 @@
       "LGM",
       "general"
     ]
+  },
+  {
+    "Título": "Vibe Coding Educativo",
+    "URL": "https://vibe-coding-educativo.github.io/",
+    "Descripción": "Comunidad y metodología para profesorado de FP centrada en la creación de aplicaciones educativas mediante vibe coding (desarrollo con lenguaje natural e IA). Incluye manual, galería de aplicaciones, boletín semanal, agente NotebookLM y grupo de Telegram activo.",
+    "Autor": "",
+    "Github": "",
+    "Twitter": "",
+    "Licencia": "",
+    "Etiquetas": [
+      "general-RECURSOS"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "general"
+    ]
   }
 ]
