@@ -9232,5 +9232,23 @@
       "general",
       "IAW"
     ]
+  },
+  {
+    "Título": "30 Days Of Python - Asabeneh Yetayeh",
+    "URL": "https://github.com/Asabeneh/30-Days-Of-Python",
+    "Descripción": "Guía paso a paso de 30 días para aprender Python. Cubre desde variables, tipos de datos, funciones y POO hasta web scraping, Pandas, MongoDB y APIs. Incluye versión en español. Más de 67.000 estrellas en GitHub.",
+    "Autor": "Asabeneh Yetayeh",
+    "Github": "https://github.com/Asabeneh/30-Days-Of-Python",
+    "Twitter": "",
+    "Licencia": "",
+    "Etiquetas": [
+      "PRG-CURSOS",
+      "general-CURSOS"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "PRG",
+      "general"
+    ]
   }
 ]
