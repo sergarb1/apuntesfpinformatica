@@ -9268,5 +9268,27 @@
       "PRG",
       "general"
     ]
+  },
+  {
+    "Título": "Manz.dev - J. Román (Manz)",
+    "URL": "https://manz.dev/",
+    "Descripción": "Web personal de Manz, desarrollador web, profesor y streamer. Contenido actualizado de HTML, CSS, JavaScript, Terminal Linux, CheatSheets y desarrollo frontend. Incluye streams en Twitch y canal de Youtube con clases y tutoriales.",
+    "Autor": "J. Román (Manz)",
+    "Github": "https://github.com/ManzDev",
+    "Twitter": "https://twitter.com/Manz",
+    "Licencia": "",
+    "Etiquetas": [
+      "DIW-RECURSOS",
+      "DWEC-RECURSOS",
+      "LGM-RECURSOS",
+      "general-RECURSOS"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "DIW",
+      "DWEC",
+      "LGM",
+      "general"
+    ]
   }
 ]
