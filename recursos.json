@@ -9250,5 +9250,23 @@
       "PRG",
       "general"
     ]
+  },
+  {
+    "Título": "OPTIL.io",
+    "URL": "https://optil.io/optilion/",
+    "Descripción": "Plataforma para resolver problemas de optimización algorítmica y competir con otros programadores. Incluye problemas de algoritmia clásicos y competiciones like PACE. Más de 7000 usuarios registrados.",
+    "Autor": "",
+    "Github": "",
+    "Twitter": "",
+    "Licencia": "",
+    "Etiquetas": [
+      "PRG-JUECES",
+      "general-JUECES"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "PRG",
+      "general"
+    ]
   }
 ]
