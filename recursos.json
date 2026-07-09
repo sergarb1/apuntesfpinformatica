@@ -9306,5 +9306,71 @@
     "Modulos": [
       "general"
     ]
+  },
+  {
+    "Título": "Apuntes Programación - Sergi García Barea",
+    "URL": "https://sergarb1.github.io/ApuntesProgramacion/",
+    "Descripción": "Apuntes completos del módulo Programación (Java) con 13 unidades didácticas y boletines de ejercicios. Cubre desde introducción a Java hasta JDBC y APIs REST. Licencia CC BY-SA 4.0.",
+    "Autor": "Sergi García Barea",
+    "Github": "https://github.com/sergarb1/ApuntesProgramacion",
+    "Twitter": "",
+    "Licencia": "CC BY-SA 4.0",
+    "Etiquetas": [
+      "PRG-APUNTES"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "PRG"
+    ]
+  },
+  {
+    "Título": "Apuntes PSP - Sergi García Barea",
+    "URL": "https://sergarb1.github.io/ApuntesPSP",
+    "Descripción": "Apuntes del módulo Programación de Procesos y Servicios (PSP) de 2º DAM. Contenidos sobre procesos, hilos, sockets, servicios y programación concurrente.",
+    "Autor": "Sergi García Barea",
+    "Github": "https://github.com/sergarb1/ApuntesPSP",
+    "Twitter": "",
+    "Licencia": "",
+    "Etiquetas": [
+      "PSP-APUNTES"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "PSP"
+    ]
+  },
+  {
+    "Título": "Apuntes Redes - Sergi García Barea",
+    "URL": "https://sergarb1.github.io/ApuntesRedes/",
+    "Descripción": "Apuntes del módulo PAR (Planificación y Administración de Redes) con 12 unidades didácticas y boletines. Cubre desde fundamentos de redes hasta cloud y virtualización. Licencia CC BY-SA 4.0.",
+    "Autor": "Sergi García Barea",
+    "Github": "https://github.com/sergarb1/ApuntesRedes",
+    "Twitter": "",
+    "Licencia": "CC BY-SA 4.0",
+    "Etiquetas": [
+      "PAR-APUNTES"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "PAR"
+    ]
+  },
+  {
+    "Título": "Apuntes Proyecto Intermodular DAW - Sergi García Barea",
+    "URL": "https://sergarb1.github.io/ApuntesProyectoDAW/",
+    "Descripción": "Guía completa del Proyecto Intermodular de DAW (PI1 y PI2). Cubre desde la definición del proyecto, análisis, diseño e implementación del MVP hasta la evolución a producto profesional con testing, despliegue y defensa. Metodología ABP y Scrum. Licencia CC BY-SA 4.0.",
+    "Autor": "Sergi García Barea",
+    "Github": "https://github.com/sergarb1/ApuntesProyectoDAW",
+    "Twitter": "",
+    "Licencia": "CC BY-SA 4.0",
+    "Etiquetas": [
+      "DAW-APUNTES",
+      "general-APUNTES"
+    ],
+    "FechaPublicacion": "2026-07-09",
+    "Modulos": [
+      "DAW",
+      "general"
+    ]
   }
 ]
