@@ -2960,9 +2960,9 @@
     ]
   },
   {
-    "Título": "Cuaderno de ejercicios del módulo Programación de Alejandro Castán",
+    "Título": "Cuaderno de ejercicios de programación de Alejandro Castán",
     "URL": "https://acastan.gitbook.io/programacion/",
-    "Descripción": "Cuaderno de ejercicios del módulo Programación de los CFGS DAM/DAW de Alejandro Castán Salinas",
+    "Descripción": "Cuaderno de ejercicios de programación en C y Python, con soluciones de los mismos. Del módulo Programación de los CFGS DAM/DAW de Alejandro Castán Salinas.",
     "Autor": "Alejandro Castán Salinas",
     "Github": "https://github.com/acastan",
     "Twitter": "https://twitter.com/joseluisgonsan",
@@ -4078,22 +4078,6 @@
     ]
   },
   {
-    "Título": "Listado de APIS Públicas",
-    "URL": "https://github.com/public-apis/public-apis",
-    "Descripción": "Listado actualizado de APIS Públicas disponibles organizadas por temáticas. Busca aquí la API que mas se ajuste a los gustos de tus alumnos :)",
-    "Autor": "",
-    "Github": "",
-    "Twitter": "https://twitter.com/JoshiRaez",
-    "Licencia": "",
-    "Etiquetas": [
-      "apis-PUBLICAS"
-    ],
-    "FechaPublicacion": "2023-08-27",
-    "Modulos": [
-      "apis"
-    ]
-  },
-  {
     "Título": "Com desenvoulpar un projecte integrat a distancia?",
     "URL": "https://projectes.xtec.cat/impulsfp/impulsfp/activafp/com-desenvolupar-un-projecte-integrat-a-distancia-tajudem-des-dactivafp/",
     "Descripción": "El programa ActivaFP da soporte al profesorado que ha de crear un módulo de Proyecto Integrado a distancia.",
@@ -4331,22 +4315,6 @@
     "FechaPublicacion": "2023-08-27",
     "Modulos": [
       "general"
-    ]
-  },
-  {
-    "Título": "Cuaderno de ejercicios de programación en C y Python",
-    "URL": "https://acastan.gitbook.io/programacion/",
-    "Descripción": "Cuaderno de ejercicios de programación en C y Python, con soluciones de los mismos.",
-    "Autor": "Alejandro Castán",
-    "Github": "",
-    "Twitter": "https://twitter.com/Manz",
-    "Licencia": "",
-    "Etiquetas": [
-      "PRG-RECURSOS"
-    ],
-    "FechaPublicacion": "2023-08-27",
-    "Modulos": [
-      "PRG"
     ]
   },
   {
@@ -5648,26 +5616,6 @@
   {
     "Título": "Snappy Driver Installer",
     "URL": "https://sdi-tool.org/",
-    "Descripción": "Herramienta para buscar e instalar drivers de sistemas Windows.",
-    "Autor": "",
-    "Github": "",
-    "Twitter": "https://twitter.com/Manz",
-    "Licencia": "",
-    "Etiquetas": [
-      "FHW-RECURSOS",
-      "MME-RECURSOS",
-      "MMSCI-RECURSOS"
-    ],
-    "FechaPublicacion": "2023-08-27",
-    "Modulos": [
-      "FHW",
-      "MME",
-      "MMSCI"
-    ]
-  },
-  {
-    "Título": "Snappy Driver Installer",
-    "URL": "https://sdi-tool.org/",
     "Descripción": "Software para detectar e instalar de forma automática drivers en sistemas Windows.",
     "Autor": "",
     "Github": "",
@@ -6032,7 +5980,7 @@
   {
     "Título": "Apuntes Servicios en red de Alejandro Castán",
     "URL": "https://acastan.gitbook.io/servicios/",
-    "Descripción": "Apuntes del módulo Servicios en red del CFGM SMR de Alejandro Castán Salinas",
+    "Descripción": "Apuntes del módulo Servicios en red del CFGM SMR realizados por Alejandro Castán Salinas.",
     "Autor": "Alejandro Castán Salinas",
     "Github": "https://github.com/acastan",
     "Twitter": "https://twitter.com/joseluisgonsan",
@@ -6379,26 +6327,6 @@
     "FechaPublicacion": "2023-08-27",
     "Modulos": [
       "general"
-    ]
-  },
-  {
-    "Título": "Apuntes de Servicios en red",
-    "URL": "https://acastan.gitbook.io/servicios/",
-    "Descripción": "Apuntes del módulo Servicios en red realizados por Alejandro Castán.",
-    "Autor": "Alejandro Castán",
-    "Github": "",
-    "Twitter": "https://twitter.com/Manz",
-    "Licencia": "",
-    "Etiquetas": [
-      "SER-APUNTES",
-      "SRI-APUNTES-OTROS",
-      "DAW-APUNTES-OTROS"
-    ],
-    "FechaPublicacion": "2023-08-27",
-    "Modulos": [
-      "DAW",
-      "SER",
-      "SRI"
     ]
   },
   {
