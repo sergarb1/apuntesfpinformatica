@@ -9310,7 +9310,7 @@
   {
     "Título": "Apuntes Programación - Sergi García Barea",
     "URL": "https://sergarb1.github.io/ApuntesProgramacion/",
-    "Descripción": "Apuntes completos del módulo Programación (Java) con 13 unidades didácticas y boletines de ejercicios. Cubre desde introducción a Java hasta JDBC y APIs REST. Licencia CC BY-SA 4.0.",
+    "Descripción": "Apuntes completos del módulo Programación (Java) con 13 unidades didácticas, boletines de ejercicios por niveles y material descargable en PDF/EPUB. Cubre desde introducción a Java, POO, colecciones, ficheros, JDBC hasta APIs REST. También disponible en valenciano. Por Sergi García Barea.",
     "Autor": "Sergi García Barea",
     "Github": "https://github.com/sergarb1/ApuntesProgramacion",
     "Twitter": "",
@@ -9326,11 +9326,11 @@
   {
     "Título": "Apuntes PSP - Sergi García Barea",
     "URL": "https://sergarb1.github.io/ApuntesPSP",
-    "Descripción": "Apuntes del módulo Programación de Procesos y Servicios (PSP) de 2º DAM. Contenidos sobre procesos, hilos, sockets, servicios y programación concurrente.",
+    "Descripción": "Apuntes del módulo Programación de Procesos y Servicios (PSP) de 2º DAM. Contenidos sobre procesos, hilos, sockets, servicios, programación concurrente y comunicación entre procesos. Por Sergi García Barea.",
     "Autor": "Sergi García Barea",
     "Github": "https://github.com/sergarb1/ApuntesPSP",
     "Twitter": "",
-    "Licencia": "",
+    "Licencia": "CC BY-SA 4.0",
     "Etiquetas": [
       "PSP-APUNTES"
     ],
@@ -9340,9 +9340,9 @@
     ]
   },
   {
-    "Título": "Apuntes Redes - Sergi García Barea",
+    "Título": "Apuntes PAR (Redes) - Sergi García Barea",
     "URL": "https://sergarb1.github.io/ApuntesRedes/",
-    "Descripción": "Apuntes del módulo PAR (Planificación y Administración de Redes) con 12 unidades didácticas y boletines. Cubre desde fundamentos de redes hasta cloud y virtualización. Licencia CC BY-SA 4.0.",
+    "Descripción": "Apuntes del módulo PAR (Planificación y Administración de Redes) con 12 unidades didácticas, boletines de ejercicios y material descargable en PDF/EPUB. Cubre fundamentos de redes, modelos OSI/TCP/IP, subnetting, switching, routing, NAT, diagnóstico y cloud. Por Sergi García Barea.",
     "Autor": "Sergi García Barea",
     "Github": "https://github.com/sergarb1/ApuntesRedes",
     "Twitter": "",
@@ -9358,7 +9358,7 @@
   {
     "Título": "Apuntes Proyecto Intermodular DAW - Sergi García Barea",
     "URL": "https://sergarb1.github.io/ApuntesProyectoDAW/",
-    "Descripción": "Guía completa del Proyecto Intermodular de DAW (PI1 y PI2). Cubre desde la definición del proyecto, análisis, diseño e implementación del MVP hasta la evolución a producto profesional con testing, despliegue y defensa. Metodología ABP y Scrum. Licencia CC BY-SA 4.0.",
+    "Descripción": "Guía completa del Proyecto Intermodular de DAW (PI1 y PI2) con material descargable en PDF/EPUB. Cubre definición del proyecto, análisis, diseño e implementación del MVP en PI1, y evolución a producto profesional con testing, despliegue y defensa en PI2. Metodología ABP y Scrum. Por Sergi García Barea.",
     "Autor": "Sergi García Barea",
     "Github": "https://github.com/sergarb1/ApuntesProyectoDAW",
     "Twitter": "",
